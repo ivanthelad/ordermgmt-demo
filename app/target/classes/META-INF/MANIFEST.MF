@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Build-Timestamp: 
+Implementation-Title: Overlord RTGov::Samples::JBossAS::OrderManagemen
+ t::App
+Implementation-Version: 2.0.0-SNAPSHOT
+Os-Version: 10.9.4
+Built-By: imckinle
+Specification-Vendor: JBoss by Red Hat
+Created-By: Maven Integration for Eclipse
+Os-Name: Mac OS X
+Implementation-URL: http://www.overlord.org/ordermgmt-demo/samples-jbo
+ ssas-ordermgmt-app-demo
+Java-Vendor: Apple Inc.
+Implementation-Vendor: JBoss by Red Hat
+Scm-Revision: 
+Implementation-Vendor-Id: org.overlord.rtgov.samples.jbossas.ordermgmt
+Scm-Url: https://github.com/Governance/ordermgmt-demo/samples-jbossas-
+ ordermgmt-app-demo
+Dependencies: deployment.overlord-rtgov.war, org.switchyard.api.extens
+ ions.wsdl
+Java-Version: 1.6.0_65
+Build-Jdk: 1.6.0_65
+Scm-Connection: https://github.com/Governance/ordermgmt-demo/samples-j
+ bossas-ordermgmt-app-demo
+Os-Arch: x86_64
+Specification-Title: Overlord RTGov::Samples::JBossAS::OrderManagement
+ ::App
+Specification-Version: 2.0.0-SNAPSHOT
+
