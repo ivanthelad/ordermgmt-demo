@@ -8,8 +8,12 @@
       <sourceFolder url="file://$MODULE_DIR$/epn-sla-breach/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/policy/async/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/policy/async/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/epn-sla-breach/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/epn-sla-breach/target" />
+      <excludeFolder url="file://$MODULE_DIR$/policy/async/data" />
+      <excludeFolder url="file://$MODULE_DIR$/policy/async/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

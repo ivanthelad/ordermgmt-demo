@@ -10,12 +10,12 @@ end
 
 rule " Handler Low"
 when
-    $rt : ResponseTime(average > 500 && average < 1000 ) from entry-point "ServiceResponseTimes"
+    $rt : ResponseTime(average > 1000 && average < 2000 ) from entry-point "ServiceResponseTimes"
 
 then
      epc.logError("DEMO -  Low situation : response time "+$rt.getAverage());
      Situation st =Util.createSituation($rt);
-     st.setDescription("  Response time for OrderService [500ms - 1000ms]" );
+     st.setDescription("  Response time for OrderService [1000ms - 2000ms]" );
      st.setSeverity(Situation.Severity.Low);
      st.getProperties().put("txTime ",""+$rt.getAverage());
      epc.handle(st);
@@ -24,12 +24,12 @@ then
 
 rule " Handler Medium"
 when
-         $rt : ResponseTime(average >= 1000 && average < 2000   ) from entry-point "ServiceResponseTimes"
+         $rt : ResponseTime(average >= 2000 && average < 4000   ) from entry-point "ServiceResponseTimes"
 
 then
         epc.logError("DEMO - Medium situation: response time "+$rt.getAverage());
         Situation st =Util.createSituation($rt);
-        st.setDescription(" Response time for OrderService [1000ms - 2000ms] " );
+        st.setDescription(" Response time for OrderService [2000ms - 4000ms] " );
         st.setSeverity(Situation.Severity.Medium);
         st.getProperties().put("txTime ",""+$rt.getAverage());
         epc.handle(st);
@@ -39,14 +39,14 @@ end
 
 rule " Handler Critical"
 when
-    $rt : ResponseTime(average >= 2000 ) from entry-point "ServiceResponseTimes"
+    $rt : ResponseTime(average >= 4000 ) from entry-point "ServiceResponseTimes"
 then
        epc.logError("DEMO - Critical Situation : response time "+$rt.getAverage());
       Situation st =Util.createSituation($rt);
-       st.setDescription("  Response time for OrderService [2000ms - *] " );
+       st.setDescription("  Response time for OrderService above 4 seconds. Inform operations team   " );
        st.setSeverity(Situation.Severity.Critical);
        st.getProperties().put("txTime ",""+$rt.getAverage());
-              st.getProperties().put("myMessage "," ohh no SLA breach ="+$rt.getAverage());
+       st.getProperties().put("myMessage "," Ohh no Critical Situation  ="+$rt.getAverage());
        
        // todo Define handler for sending email
        epc.handle(st);

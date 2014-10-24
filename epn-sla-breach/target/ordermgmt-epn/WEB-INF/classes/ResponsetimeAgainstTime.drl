@@ -1,9 +1,0 @@
-rule "Sound the alarm in case temperature rises above threshold"
-when
-    TemperatureThreshold( $max : max )
-    Number( doubleValue > $max ) from accumulate(
-        SensorReading( $temp : temperature ) over window:length( 100 ),
-        average( $temp ) )
-then
-    // sound the alarm
-end

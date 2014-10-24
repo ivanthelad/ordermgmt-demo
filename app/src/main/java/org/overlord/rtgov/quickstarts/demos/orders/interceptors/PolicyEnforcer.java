@@ -40,8 +40,9 @@ import org.switchyard.Property;
  * This class represents a policy enforcer.
  *
  */
-@Named("PolicyEnforcer")
-public class PolicyEnforcer  implements ExchangeInterceptor {
+//@Named("PolicyEnforcer")
+//public class PolicyEnforcer  implements ExchangeInterceptor {
+	public class PolicyEnforcer  implements ExchangeInterceptor {
     
     private static final String PRINCIPALS = "Principals";
 

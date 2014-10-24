@@ -1,39 +1,39 @@
 {
     "name": "OrderServiceResponseTimeSLAViolation",
     "subscriptions": [
-        {
-            "nodeName": "OrderServiceSLAViolations",
-            "subject": "ServiceResponseTimes"
+              {
+            "nodeName": "LoadIncrease",
+            "subject": "SOAEvents"
         }
 
     ],
     "nodes": [
+     
         {
-            "name": "OrderServiceSLAViolations",
+            "name": "LoadIncrease",
             "sourceNodes": [ ],
             "destinationSubjects": [ "Situations" ],
             "maxRetries": 3,
             "retryInterval": 0,
-            "predicate" :{
+            "predicate" : {
                 "@class" : "org.overlord.rtgov.ep.mvel.MVELPredicate",
-                "expression" : "event.operation== \"submitOrder\" &&  event.serviceType == \"{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService\""
+                "expression" : "event instanceof org.overlord.rtgov.activity.model.soa.RequestReceived  && event.serviceType == \"{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService\""
             },
             "eventProcessor": {
                 "@class": "org.overlord.rtgov.ep.drools.DroolsEventProcessor",
-                "ruleName": "0SLAViolationDemo"
-                },
+                "ruleName": "1detectLoad",
+                "eventProcessingMode" : "stream",
+                "asynchronous" : "true"
+            },
 
             "notifications": [
-                {
-                    "type": "Processed",
-                    "subject": "SituationsProcessed"
-                },
                 {
                     "type": "Results",
                     "subject": "Situations"
                 }
             ]
         }
+
 
     ],
     "version": "1"

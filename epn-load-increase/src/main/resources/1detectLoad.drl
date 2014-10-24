@@ -1,0 +1,63 @@
+import org.overlord.rtgov.activity.model.soa.RequestReceived
+import org.overlord.rtgov.analytics.situation.Situation
+import org.jboss.rtgov.actvity.Util
+import java.util.Objects
+
+global org.overlord.rtgov.ep.EPContext epc
+
+declare RequestReceived
+    @role( event )
+    @timestamp( timestamp )
+    @expires( 2s )
+end
+
+rule "Load increased rule Medium"
+when
+     Number( doubleValue > 10, doubleValue < 20   ) from accumulate(
+       $r: RequestReceived( operation=="submitOrder" , serviceType=="{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService" ) over window:time( 2s ) from entry-point "SOAEvents" , count($r)
+         )
+         accumulate( $e : RequestReceived(operation=="submitOrder", serviceType=="{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService") over window:time( 2s ) from entry-point "SOAEvents" ,
+                         $events : collectList( $e ) )
+
+then
+  System.out.println("Excessive number of requests["+$events.size()+"] for service [OrderService]." );
+
+  Situation situation=new Situation();
+  situation.setDescription("Excessive number of requests["+$events.size()+"] for service [OrderService]." );
+  situation.setType("Load Increased");
+  situation.setSubject(Situation.createSubject("{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService", "submitOrder",
+                                                   "High load observered "));
+  situation.setSeverity(Situation.Severity.Medium);
+  situation.setTimestamp(System.currentTimeMillis());
+   for (Object handle : $events) {
+          retract(handle);
+      }
+  epc.handle(situation);
+end
+
+
+rule "Load increased rule High"
+when
+
+     Number( doubleValue >= 20, doubleValue < 30   ) from accumulate(
+       $r: RequestReceived( operation=="submitOrder" , serviceType=="{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService" ) over window:time( 2s ) from entry-point "SOAEvents" , count($r)
+         )
+         accumulate( $e : RequestReceived(operation=="submitOrder", serviceType=="{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService") over window:time( 2s ) from entry-point "SOAEvents" ,
+                         $events : collectList( $e ) )
+
+then
+System.out.println("Excessive number of requests["+$events.size()+"] for service [OrderService]. Exceeding system capability ");
+
+
+  Situation situation=new Situation();
+  situation.setDescription("Excessive number of requests["+$events.size()+"] for service [OrderService]. Exceeding system capability " );
+  situation.setType("Load Increased");
+  situation.setSubject(Situation.createSubject("{urn:switchyard-quickstart-demo:orders:0.1.0}OrderService", "submitOrder",
+                                                   "High load observered "));
+  situation.setSeverity(Situation.Severity.Critical);
+  situation.setTimestamp(System.currentTimeMillis());
+   for (Object handle : $events) {
+          retract(handle);
+      }
+  epc.handle(situation);
+end

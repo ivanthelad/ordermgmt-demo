@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.overlord.rtgov.samples.jbossas.ordermgmt</groupId>
-    <artifactId>samples-jbossas-ordermgmt-epn-demo</artifactId>
+    <artifactId>samples-jbossas-ordermgmt-loadincrease-demo</artifactId>
     <packaging>war</packaging>
-    <name>Overlord RTGov::Samples::JBossAS::OrderManagement::EPN-Sla-breach</name>
+    <name>Overlord RTGov::Samples::JBossAS::OrderManagement::EPN-increase-load</name>
 
     <parent>
         <groupId>org.overlord.rtgov.samples.jbossas</groupId>

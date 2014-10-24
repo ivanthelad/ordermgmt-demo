@@ -87,6 +87,8 @@ public class FundsServiceBean implements FundsService {
             principal.put("suspended", Boolean.FALSE);
         }
 
+        if(newamount < 0)
+            newamount = Double.valueOf(0);
         principal.put("exposure", newamount);
 
 
